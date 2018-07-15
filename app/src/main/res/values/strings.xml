@@ -3,4 +3,11 @@
     <string name="title_activity_search">Search Activity</string>
     <string name="title_activity_photo_detail">Photo Detail</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="browse_image_description">Downloaded flickr photo</string>
+    <string name="photo_title_text">Title: %s</string>
+    <string name="photo_author_text">Author: %s</string>
+    <string name="photo_tags_text">Tags: %s</string>
+    <string name="activity_search">Search</string>
+    <string name="searchable_hint">Enter Photo tags</string>
+    <string name="error404">No photos found    Please change search parameters by taping on the search icon.</string>
 </resources>

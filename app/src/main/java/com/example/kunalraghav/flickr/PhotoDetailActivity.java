@@ -1,12 +1,8 @@
 package com.example.kunalraghav.flickr;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,19 +22,40 @@ public class PhotoDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         PhotoData photoData =(PhotoData) intent.getSerializableExtra(PHOTO_TRANSFER);
         if(photoData != null){
+            Resources resources = getResources();
+
             ImageView imageView =  findViewById(R.id.PhotoView);
-            TextView title =findViewById(R.id.Photo_title);
-            TextView tags = findViewById(R.id.PhotoTags);
-            TextView author = findViewById(R.id.photoAuthor);
-            title.setText("Title: "+photoData.getTitle());
             Glide.with(this)
                     .load(photoData.getBig_img_url())
                     .apply(new RequestOptions()
                             .error(R.drawable.placeholder)
                     )
                     .into(imageView);
-            author.setText("Author: "+photoData.getAuthor());
-            tags.setText("Tags: "+photoData.getTags());
+
+
+
+
+            TextView title =findViewById(R.id.Photo_title);
+            title.setText(resources.getString(R.string.photo_title_text,photoData.getTitle()));
+
+
+
+            TextView tags = findViewById(R.id.PhotoTags);
+            tags.setText(resources.getString(R.string.photo_tags_text,photoData.getTags()));
+
+
+
+
+
+            TextView author = findViewById(R.id.photoAuthor);
+            author.setText(resources.getString(R.string.photo_author_text,photoData.getAuthor()));
+
+
+
+
+
+//            title.setText("Title: "+photoData.getTitle());
+
         }
 
     }

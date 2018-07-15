@@ -34,23 +34,28 @@ class FlickrRecycleViewAdapter extends RecyclerView.Adapter<FlickrRecycleViewAda
     @Override
     public void onBindViewHolder(@NonNull FlickrImageViewHolder holder, int position) {
         //called by the layout manager when it needs new data in an existing row
-        PhotoData photoItem = photoDataArrayList.get(position);
-        Log.d(TAG, "onBindViewHolder:" + photoItem.getTitle() + "--->" + position);
-        Glide.with(context)
-                .load(photoItem.getImage())
-                .apply(new RequestOptions()
-                        .placeholder(R.drawable.placeholder)
-                        .optionalCenterCrop()
-                )
-                .into(holder.thumbnail);
-        holder.title.setText(photoItem.getTitle());
+        if(photoDataArrayList==null||photoDataArrayList.size()==0){
+            holder.thumbnail.setImageResource(R.drawable.placeholder);
+            holder.title.setText(R.string.error404);
+        }else {
+            PhotoData photoItem = photoDataArrayList.get(position);
+            Log.d(TAG, "onBindViewHolder:" + photoItem.getTitle() + "--->" + position);
+            Glide.with(context)
+                    .load(photoItem.getImage())
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.placeholder)
+                            .optionalCenterCrop()
+                    )
+                    .into(holder.thumbnail);
+            holder.title.setText(photoItem.getTitle());
+        }
     }
 
     @Override
     public int getItemCount() {
 //        Log.d(TAG, "getItemCount: called");
 
-        return (((photoDataArrayList!=null)&&(photoDataArrayList.size()!=0)) ? photoDataArrayList.size() : 0);
+        return (((photoDataArrayList!=null)&&(photoDataArrayList.size()!=0)) ? photoDataArrayList.size() : 1);
     }
 
     void loadNewData(ArrayList<PhotoData> newphotoData){
